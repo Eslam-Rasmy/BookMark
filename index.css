@@ -10,6 +10,7 @@ body {
 h1 {
     font-family: "Pacifico", cursive;
     isolation: isolate;
+    user-select: none;
 }
 
 main {
@@ -45,6 +46,7 @@ h2 {
     background-image: linear-gradient(to right, #3ca55c, #b5ac49);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    user-select: none;
 }
 
 .form-control:focus {

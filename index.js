@@ -14,7 +14,6 @@ function addProduct() {
         var productExists = productCountainer.some(function (product) {
             return product.Name.toLowerCase() === productName.value.toLowerCase();
         });
-
         if (productExists) {
             Swal.fire({
                 title: "Product name already exists!",
@@ -157,8 +156,17 @@ function validateForm(ele) {
     }
 }
 function updateProduct() {
-    if (validateForm(productName) &&
-        validateForm(productUrl)){
+    if (validateForm(productName) && validateForm(productUrl)) {
+        var productExists = productCountainer.some(function (product) {
+            return product.Name.toLowerCase() === productName.value.toLowerCase();
+        });
+        if (productExists) {
+            Swal.fire({
+                title: "Product name already exists!",
+                icon: "error",
+                text: "Please enter a different product name."
+            });
+        } else {
             productCountainer[updateIndex].Name = productName.value;
             productCountainer[updateIndex].Url = productUrl.value;
             display();
@@ -166,17 +174,18 @@ function updateProduct() {
             btnAdd.classList.remove("d-none");
             btnUpdate.classList.add("d-none");
             clearForm();
-        }else{
-            Swal.fire({
-                title: "Site Name or Url is not valid, Please follow the rules below :",
-                icon: "question",
-                iconHtml: "?",
-                confirmButtonText: "Site name must contain at least 3 characters",
-                cancelButtonText: "Site URL must be a valid one",
-                showCancelButton: true,
-                showCloseButton: true
-              });    
         }
+    } else {
+        Swal.fire({
+            title: "Site Name or Url is not valid, Please follow the rules below :",
+            icon: "question",
+            iconHtml: "?",
+            confirmButtonText: "Site name must contain at least 3 characters",
+            cancelButtonText: "Site URL must be a valid one",
+            showCancelButton: true,
+            showCloseButton: true
+        });
+    }
 }
 
 function searchProduct() {
